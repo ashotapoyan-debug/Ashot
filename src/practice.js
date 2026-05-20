@@ -31,6 +31,9 @@ const asteroids = [
     { name: "2024 EF3",diameter: 890,hazardous: false },
     { name: "2024 GH4", diameter: 23,hazardous: true }
     ]
-const names = asteroids.map(person => person.name)
+const names = asteroids.map(asteroids => asteroids.name);
 console.log(names);
-const issOnly = crew.filter(person =>)
+const hazardous = asteroids.filter(asteroids => asteroids.hazardous === true);
+console.log(hazardous);
+const diameter = asteroids.filter(asteroids => asteroids.diameter);
+console.log(diameter);
