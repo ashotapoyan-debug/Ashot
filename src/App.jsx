@@ -5,14 +5,11 @@ import Navbar from './Navbar' // Import the new component
 export default function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
 
-  return (
-    <div className="app-container">
-      {/* Pass state variables downwards as React Props */}
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-
-      <div className="dashboard">
-        {/* Conditional Tab Rendering */}
-        {activeTab === 'dashboard' ? (
+  // Helper function to render different content blocks dynamically based on activeTab
+  const renderTabContent = () => {
+    switch (activeTab) {
+      case 'dashboard':
+        return (
           <div className="grid">
             <Counter />
             <ISSTracker />
@@ -21,8 +18,12 @@ export default function App() {
             <Constellations /> 
             <NextLaunch />
             <APOD />
+            <ISSLiveFeed />
           </div>
-        ) : (
+        );
+      
+      case 'solarsystem':
+        return (
           <div className="card solar-system">
             <h2> Solar System </h2>
             <iframe
@@ -30,13 +31,73 @@ export default function App() {
               title="NASA Solar System"
             />
           </div>
-        )}
+        );
+
+      case 'card':
+        // When activeTab is 'card', isolate the APOD component inside a centered container
+        return (
+          <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+            <APOD />
+            <ISSLiveFeed />
+          </div>
+        );
+
+      default:
+        return <div className="card"><h2>Page not found</h2></div>;
+    }
+  };
+
+  return (
+    <div className="app-container">
+      {/* Pass state control tools down to our Navbar */}
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      <div className="dashboard">
+        {/* Call our helper rendering engine directly inside the layout wrapper */}
+        {renderTabContent()}
       </div>
     </div>
   )
 }
 
-// Your subcomponents (Counter, ISSTracker, etc.) remain untouched below this line...
+// All subsequent subcomponents (Counter, ISSTracker, APOD, etc.) remain completely untouched below...
+
+
+// TAB PAGE 1: Constellations
+function ConstellationsTab() {
+  return (
+    <div className="constellations-page"> {/* Unique Parent Wrapper */}
+      <h1 className="title">Star Constellations</h1>
+      
+      <div className="grid">
+        <div className="card">
+          <h2>Orion</h2>
+          <p>Information about the hunter constellation...</p>
+        </div>
+        <div className="card">
+          <h2>Ursa Major</h2>
+          <p>Information about the great bear constellation...</p>
+        </div>
+      </div>
+      
+    </div>
+  )
+}
+
+// TAB PAGE 2: Dashboard (APOD & ISS Live Feed)
+function DashboardTab() {
+  return (
+    <div className="dashboard-page"> {/* Unique Parent Wrapper */}
+      <h1 className="title">Space Control Dashboard</h1>
+      
+      <div className="grid">
+        <APOD />       {/* Uses className="card" inside */}
+        <ISSTracker5 /> {/* Uses className="card" inside */}
+      </div>
+      
+    </div>
+  )
+}
 
 function Counter() {
   const [count, setCount] = useState(0)
@@ -320,6 +381,48 @@ function NextLaunch() {
         </div>
       ) : (
         <p>Loading...</p>
+      )}
+    </div>
+  )
+}
+
+function ISSLiveFeed() {
+  const [show, setShow] = useState(false)
+
+  return (
+    <div className="card">
+      <h2> ISS Live Camera</h2>
+
+      <p style={{ color: '#aaa', fontSize: '0.85rem', marginBottom: 12 }}>
+        Live HD stream from the International Space Station (NASA HDEV)
+      </p>
+
+      {!show ? (
+        <button className="counter-btn" onClick={() => setShow(true)}>
+          ▶ Load Live Stream
+        </button>
+      ) : (
+        <div className="iss-feed-wrapper">
+
+          <iframe
+            src="https://www.youtube.com/embed/uwXgcTc8oY8?autoplay=1&mute=1"
+            width="560"
+            height="315"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            style={{
+              width: '100%',
+              aspectRatio: '16/9',
+              border: 'none',
+              borderRadius: 8,
+            }}
+          />
+
+          <p className="label" style={{ marginTop: 8 }}>
+            <span className="live">● LIVE</span> — NASA Johnson Space Center
+          </p>
+
+        </div>
       )}
     </div>
   )

@@ -736,3 +736,51 @@ iframe {
   }
 }
 
+/* ===================================================
+   1. CONSTELLATIONS PAGE STYLES
+   =================================================== */
+
+/* This grid layout only applies to the Constellations tab */
+.constellations-page .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+/* These specific card styles only apply to the Constellations tab */
+.constellations-page .card {
+  background: rgba(15, 23, 42, 0.9); /* Dark blue/slate background */
+  border: 1px solid #818cf8;          /* Purple stellar border */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(129, 140, 248, 0.2); /* Glow effect */
+}
+
+.constellations-page .card h2 {
+  color: #aade4a; /* Light green text for stars */
+}
+
+
+/* ===================================================
+   2. DASHBOARD PAGE STYLES (APOD & ISS)
+   =================================================== */
+
+/* This grid layout only applies to the Dashboard tab */
+.dashboard-page .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two even columns side-by-side */
+  gap: 24px;
+}
+
+/* These card styles only apply to the Dashboard tab */
+.dashboard-page .card {
+  background: #000000;           /* Jet black background */
+  border: 1px solid #1f2937;     /* Subtle grey border */
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.dashboard-page .card h2 {
+  color: #38bdf8; /* Light blue tech-style text for dashboard widgets */
+}
+

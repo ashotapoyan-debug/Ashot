@@ -40,7 +40,13 @@ export default function Navbar({ activeTab, setActiveTab }) {
                     className={`navbar-item ${activeTab === 'card' ? 'active' : ''}`}
                     onClick={() => { setActiveTab('card'); setIsOpen(false); }}
                 >
-                    photo and video
+                    Photo and Video
+                </button>
+                <button
+                    className={`navbar-item ${activeTab === 'card' ? 'active' : ''}`}
+                    onClick={() => { setActiveTab('card'); setIsOpen(false); }}
+                >
+                    Constellations
                 </button>
             </div>
         </nav>
