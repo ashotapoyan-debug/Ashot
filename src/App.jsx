@@ -1,32 +1,42 @@
 import './App.css'
 import { useState, useEffect } from 'react'
+import Navbar from './Navbar' // Import the new component
 
 export default function App() {
-  return (
-    <div className="dashboard">
-      <h1>Ashot Apoyan</h1>
-      <h1></h1>
-      {/* Cards wrapped in the grid div for clean layout */}
-      <div className="grid">
-        <Counter />
-        <ISSTracker />
-        <PeopleInSpace />
-        <Asteroids />
-        <Constellations /> {/* New English Constellations Section */}
-        <NextLaunch />
-        <APOD />
-      </div>
+  const [activeTab, setActiveTab] = useState('dashboard');
 
-      <div className="card solar-system">
-        <h2> Solar System </h2>
-        <iframe
-          src="https://eyes.nasa.gov/apps/solar-system/#/home"
-          title="NASA Solar System"
-        />
+  return (
+    <div className="app-container">
+      {/* Pass state variables downwards as React Props */}
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      <div className="dashboard">
+        {/* Conditional Tab Rendering */}
+        {activeTab === 'dashboard' ? (
+          <div className="grid">
+            <Counter />
+            <ISSTracker />
+            <PeopleInSpace />
+            <Asteroids />
+            <Constellations /> 
+            <NextLaunch />
+            <APOD />
+          </div>
+        ) : (
+          <div className="card solar-system">
+            <h2> Solar System </h2>
+            <iframe
+              src="https://eyes.nasa.gov/apps/solar-system/#/home"
+              title="NASA Solar System"
+            />
+          </div>
+        )}
       </div>
     </div>
   )
 }
+
+// Your subcomponents (Counter, ISSTracker, etc.) remain untouched below this line...
 
 function Counter() {
   const [count, setCount] = useState(0)

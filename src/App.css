@@ -613,3 +613,126 @@ iframe {
   letter-spacing: 0.05em;
 }
 
+
+
+/* ===== TUTORIAL NAVBAR STYLES ===== */
+:root {
+  --navbar-height: 70px;
+  --navbar-bg: rgba(10, 10, 10, 0.85);
+  --text-active: #4ade80;
+  --text-inactive: #9ca3af;
+  --transition-speed: 0.25s ease;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: var(--navbar-height);
+  background: var(--navbar-bg);
+  border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+  backdrop-filter: blur(12px);
+  padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--text-active);
+  text-shadow: 
+    0 0 10px rgba(74, 222, 128, 0.7),
+    0 0 25px rgba(74, 222, 128, 0.4);
+  letter-spacing: 0.12em;
+}
+
+.navbar-menu {
+  display: flex;
+  gap: 15px;
+}
+
+/* Custom override matching Buckhouse's menu items approach */
+.navbar-menu .navbar-item {
+  width: auto;
+  background: transparent;
+  color: var(--text-inactive);
+  border: 1px solid transparent;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  transition: all var(--transition-speed);
+}
+
+.navbar-menu .navbar-item:hover {
+  color: var(--text-active);
+  background: rgba(74, 222, 128, 0.05);
+  border-color: rgba(74, 222, 128, 0.2);
+  box-shadow: none;
+  transform: none;
+}
+
+.navbar-menu .navbar-item.active {
+  color: black;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.35);
+}
+
+/* Mobile Toggle Hamburger Icon Button */
+.navbar-toggle {
+  display: none; /* Hidden on desktop screens */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.navbar-toggle .bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-active);
+  border-radius: 10px;
+  transition: all var(--transition-speed);
+}
+
+/* ===== MOBILE RESPONSIVE MEDIA BREAKPOINT ===== */
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: flex; /* Display the menu icon on small screens */
+  }
+
+  .navbar-menu {
+    display: none; /* Hide standard navigation link alignment */
+    flex-direction: column;
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+    width: 100%;
+    background: #0a0a0a;
+    border-bottom: 1px solid rgba(74, 222, 128, 0.2);
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 10px;
+  }
+
+  /* When the state is true, reveal the hidden mobile dropdown link menu */
+  .navbar-menu.is-active {
+    display: flex;
+  }
+
+  .navbar-menu .navbar-item {
+    width: 100%;
+    text-align: center;
+  }
+}
+
