@@ -11,17 +11,13 @@ export default function App() {
       case 'dashboard':
         return (
           <div className="grid">
-            <Counter />
             <ISSTracker />
             <PeopleInSpace />
             <Asteroids />
-            <Constellations /> 
             <NextLaunch />
-            <APOD />
-            <ISSLiveFeed />
           </div>
         );
-      
+
       case 'solarsystem':
         return (
           <div className="card solar-system">
@@ -41,6 +37,13 @@ export default function App() {
             <ISSLiveFeed />
           </div>
         );
+      case 'constellations':
+        return (
+          <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+            <ConstellationsTab />
+          </div>
+        );
+
 
       default:
         return <div className="card"><h2>Page not found</h2></div>;
@@ -60,41 +63,98 @@ export default function App() {
   )
 }
 
-// All subsequent subcomponents (Counter, ISSTracker, APOD, etc.) remain completely untouched below...
-
-
-// TAB PAGE 1: Constellations
 function ConstellationsTab() {
+  const constellations = [
+    {
+      name: "Orion",
+      latin: "Orion",
+      brightestStar: "Rigel",
+      image: "https://images.unsplash.com/photo-1539321908154-04927596764d?q=80&w=600",
+      description: "Known as the Hunter, Orion is one of the most recognizable constellations in the night sky, visible globally. It features the famous Orion's Belt."
+    },
+    {
+      name: "Ursa Major",
+      latin: "Ursa Major",
+      brightestStar: "Alioth",
+      image: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=600",
+      description: "Also known as the Great Bear, it contains the Big Dipper asterism, which is traditionally used as a navigation tool to find the North Star."
+    },
+    {
+      name: "Cassiopeia",
+      latin: "Cassiopeia",
+      brightestStar: "Schedar",
+      image: "https://images.unsplash.com/photo-1610296669228-602fa827fc1f?q=80&w=600",
+      description: "A prominent constellation in the northern sky named after a queen in Greek mythology. It is easily recognized by its distinct 'W' or 'M' shape formed by its brightest stars."
+    },
+    {
+      name: "Taurus",
+      latin: "Taurus",
+      brightestStar: "Aldebaran",
+      image: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=600",
+      description: "An ancient zodiac constellation representing the Bull. It features the bright red giant star Aldebaran and hosts the spectacular Pleiades (Seven Sisters) star cluster."
+    },
+    {
+      name: "Leo",
+      latin: "Leo",
+      brightestStar: "Regulus",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600",
+      description: "One of the earliest recognized constellations, representing the Nemean Lion. It is easily found in the spring sky by looking for a backward question mark pattern called 'The Sickle'."
+    },
+    {
+      name: "Scorpius",
+      latin: "Scorpius",
+      brightestStar: "Antares",
+      image: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=600",
+      description: "A striking southern zodiac constellation that genuinely resembles a scorpion. At its heart sits Antares, a massive, reddish supergiant star often called the 'Heart of the Scorpion'."
+    }
+  ];
+
   return (
-    <div className="constellations-page"> {/* Unique Parent Wrapper */}
+    <div className="constellations-page">
       <h1 className="title">Star Constellations</h1>
-      
+
       <div className="grid">
-        <div className="card">
-          <h2>Orion</h2>
-          <p>Information about the hunter constellation...</p>
-        </div>
-        <div className="card">
-          <h2>Ursa Major</h2>
-          <p>Information about the great bear constellation...</p>
-        </div>
+        {constellations.map((constellation, index) => (
+          <div className="card const-card" key={index}>
+
+            {/* Constellation Image */}
+            <img
+              src={constellation.image}
+              alt={constellation.name}
+              className="const-img"
+            />
+
+            {/* Constellation Info */}
+            <div className="const-info">
+              <h2>
+                {constellation.name}
+                <span className="latin-name"> ({constellation.latin})</span>
+              </h2>
+              <p className="star-detail">
+                <strong>Brightest Star:</strong> {constellation.brightestStar}
+              </p>
+              <p className="description">
+                {constellation.description}
+              </p>
+            </div>
+
+          </div>
+        ))}
       </div>
-      
     </div>
   )
 }
-
 // TAB PAGE 2: Dashboard (APOD & ISS Live Feed)
 function DashboardTab() {
   return (
     <div className="dashboard-page"> {/* Unique Parent Wrapper */}
       <h1 className="title">Space Control Dashboard</h1>
-      
+
       <div className="grid">
         <APOD />       {/* Uses className="card" inside */}
         <ISSTracker5 /> {/* Uses className="card" inside */}
       </div>
-      
+
     </div>
   )
 }
@@ -253,10 +313,6 @@ function APOD() {
     </div>
   )
 }
-
-// ==========================================
-//          CONSTELLATIONS COMPONENT
-// ==========================================
 function Constellations() {
   const [selectedConst, setSelectedConst] = useState(null)
 
@@ -300,8 +356,8 @@ function Constellations() {
       <h2>Constellations</h2>
       <div className="constellation-list">
         {constellationsData.map(constellation => (
-          <div 
-            key={constellation.id} 
+          <div
+            key={constellation.id}
             className="constellation-row"
             onClick={() => setSelectedConst(constellation)}
           >

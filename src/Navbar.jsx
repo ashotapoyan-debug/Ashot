@@ -28,7 +28,7 @@ export default function Navbar({ activeTab, setActiveTab }) {
                     className={`navbar-item ${activeTab === 'dashboard' ? 'active' : ''}`}
                     onClick={() => { setActiveTab('dashboard'); setIsOpen(false); }}
                 >
-                    Dashboard
+                    astronaut
                 </button>
                 <button
                     className={`navbar-item ${activeTab === 'solarsystem' ? 'active' : ''}`}
@@ -43,11 +43,11 @@ export default function Navbar({ activeTab, setActiveTab }) {
                     Photo and Video
                 </button>
                 <button
-                    className={`navbar-item ${activeTab === 'card' ? 'active' : ''}`}
-                    onClick={() => { setActiveTab('card'); setIsOpen(false); }}
-                >
-                    Constellations
+                className={`navbar-item ${activeTab === 'constellations' ? 'active' : ''}`}
+                onClick={() => setActiveTab('constellations')}
+                    >Constellations
                 </button>
+
             </div>
         </nav>
     )
