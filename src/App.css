@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-image:
-    url("src/assets/tiezerq.jpg");
+    url("/tiezerq.jpg");
   font-family: "JetBrains Mono", monospace;
   overflow-x: hidden;
 }
