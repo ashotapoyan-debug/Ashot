@@ -207,7 +207,7 @@ function ISSTracker() {
 function PeopleInSpace() {
   const [people, setPeople] = useState(null)
   useEffect(() => {
-    fetch('http://api.open-notify.org/astros.json')
+    fetch('https://api.open-notify.org/astros.json')
       .then(r => r.json())
       .then(data => setPeople(data.people))
   }, [])
