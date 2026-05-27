@@ -3,7 +3,6 @@ body {
   padding: 0;
   background-image:
     url("src/assets/tiezerq.jpg");
-  color: #f3f4f6;
   font-family: "JetBrains Mono", monospace;
   overflow-x: hidden;
 }
